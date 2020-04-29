@@ -11,12 +11,12 @@ const routes = (store) => [
   {
     path: '/',
     name: 'home',
-    redirect: { name: 'loader' },
+    redirect: { name: 'invoice' },
   },
   appRoute({ store }),
   {
     path: '*',
-    redirect: '/loader',
+    redirect: '/invoice',
   },
 ]
 
