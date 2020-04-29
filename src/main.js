@@ -8,7 +8,7 @@ Vue.config.productionTip = false
 
 const request = new RequestService()
 
-request.get(`${process.env.VUE_APP_API_URL}/config`)
+request.get('https://frontend-skill-test.herokuapp.com/api/config')
   .then(response => response.data)
   .then(initialConfig => {
     const initialStore = store({ initialConfig })

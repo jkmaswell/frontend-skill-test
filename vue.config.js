@@ -3,16 +3,6 @@ module.exports = {
   filenameHashing: false,
   devServer: {
     port: 3000,
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        changeOrigin: false,
-        secure: false,
-        headers: {
-          'x-forwarded-proto': 'https',
-        },
-      },
-    },
   },
   css: {
     loaderOptions: {
