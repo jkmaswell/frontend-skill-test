@@ -57,6 +57,7 @@
     "nodemon": "^1.19.4",
     "prettier": "^1.18.2",
     "sass-loader": "^8.0.0",
+    "velocity-animate": "^2.0.6",
     "vue-template-compiler": "^2.6.10"
   }
 }

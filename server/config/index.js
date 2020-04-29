@@ -1,7 +1,8 @@
-import { get } from 'lodash'
+import { merge, get } from 'lodash'
 import defaultConfig from './configDefault'
+import appLanguage from './appLanguage'
 
-const configObj = defaultConfig
+const configObj = merge({}, defaultConfig, appLanguage)
 
 export default {
   get (path, defaultValue) {

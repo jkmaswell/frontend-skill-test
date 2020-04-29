@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import config from './modules/config'
 import { dispatchAction } from './actions'
 
 Vue.use(Vuex)
@@ -11,6 +12,8 @@ export default function store ({ initialConfig }) {
     actions: {
       dispatchAction,
     },
-    modules: {},
+    modules: {
+      config: config(initialConfig),
+    },
   })
 }

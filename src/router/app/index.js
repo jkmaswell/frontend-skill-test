@@ -1,4 +1,5 @@
 import loaderRoute from './routes/loaderRoute/loaderRoute'
+import invoiceRoute from './routes/invoiceRoute/invoiceRoute'
 
 export default function appRoute ({ store }) {
   return {
@@ -6,6 +7,7 @@ export default function appRoute ({ store }) {
     component: () => import(/* webpackChunkName: "loader-page" */ '@/layouts/StandardLayout/StandardLayout.vue'),
     children: [
       loaderRoute(),
+      invoiceRoute(),
     ],
   }
 }

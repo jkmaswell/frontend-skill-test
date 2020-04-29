@@ -8,7 +8,16 @@ import { scrollToTop } from './utils/scrollBehavior'
 Vue.use(Router)
 
 const routes = (store) => [
+  {
+    path: '/',
+    name: 'home',
+    redirect: { name: 'loader' },
+  },
   appRoute({ store }),
+  {
+    path: '*',
+    redirect: '/loader',
+  },
 ]
 
 const router = (store) => {
