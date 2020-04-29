@@ -1,18 +1,11 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import loaderRoute from './routes/loaderRoute/loaderRoute'
 
-// Routes
-
-// Scroll Behavior
-import { scrollToTop } from '../utils/scrollBehavior'
-
-Vue.use(Router)
-
-export default function appRouter ({ store }) {
-  const router = new Router({
-    routes: [],
-    scrollBehavior: (to, from, savedPosition) => scrollToTop(to, from, savedPosition),
-  })
-
-  return router
+export default function appRoute ({ store }) {
+  return {
+    path: '/',
+    component: () => import(/* webpackChunkName: "loader-page" */ '@/layouts/StandardLayout/StandardLayout.vue'),
+    children: [
+      loaderRoute(),
+    ],
+  }
 }
