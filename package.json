@@ -11,7 +11,8 @@
     "test:server": "BABEL_CONFIG=server JEST_CONFIG=server jest",
     "test:server:watch": "BABEL_CONFIG=server JEST_CONFIG=server jest --watch",
     "lint": "vue-cli-service lint",
-    "server:watch": "NODE_ENV=local BABEL_CONFIG=server nodemon --watch server --watch server.js --exec babel-node server.js"
+    "server:watch": "NODE_ENV=local BABEL_CONFIG=server nodemon --watch server --watch server.js --exec babel-node server.js",
+    "start": "NODE_ENV=local BABEL_CONFIG=server nodemon --watch server --watch server.js --exec babel-node server.js"
   },
   "gitHooks": {
     "pre-commit": ""
