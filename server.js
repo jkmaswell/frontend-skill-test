@@ -5,16 +5,14 @@ require('@babel/register')({
 })
 
 const express = require('express')
-const { default: config } = require('./server/config')
 const routes = require('./server/routes')
 
-const { httpPort, envName } = config.get()
 const app = express()
 
 app.use('/', routes.default)
 
-app.listen(httpPort, () => {
-  console.log(`Running on port ${httpPort}...`)
-  console.log(`Environment: ${process.env.NODE_ENV}`)
-  console.log(`Config Environment Name: ${envName}`) // sanity check
+app.get('/', function (req, res) {
+  res.send('<h1>Hello World!</h1>')
 })
+
+app.listen(process.env.PORT || 3000, () => console.log('Server is running...'))
