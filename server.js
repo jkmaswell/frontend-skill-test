@@ -10,7 +10,7 @@ const routes = require('./server/routes')
 
 const app = express()
 
-app.use(cors({ origin: /herokuapp\.com$/ }))
+app.use(cors())
 app.use('/', routes.default)
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
