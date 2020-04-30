@@ -2,8 +2,9 @@
   <div class="card-container">
     <div
       v-for="(card, index) in mainCards"
-      :key="card.code"
+      :key="index"
       :data-card="index"
+      :class="classModifier(card)"
       class="card"
     >
       <div class="card__logo-container">
@@ -11,7 +12,7 @@
           src="../../assets/logo-510.png"
           class="card__logo"
         >
-        <span class="card__status" @click="swipeCard()">{{ card.status }}</span>
+        <span class="card__status" @click="swipeCard(card)">{{ card.status }}</span>
       </div>
       <div class="card__invoice-info">
         <div class="card__cell">
@@ -28,6 +29,8 @@
 </template>
 
 <script>
+import { cloneDeep } from 'lodash'
+
 export default {
   props: {
     cards: {
@@ -56,33 +59,33 @@ export default {
     },
   },
   methods: {
-    swipeCard () {
-      const elements = document.querySelectorAll('.card')
-      const card = this.mainCards[this.mainCards.length - 1]
-      elements[this.mainCards.length - 3].classList.add('beforeEnter')
-      elements[this.mainCards.length - 2].classList.add('onEnter')
-      elements[this.mainCards.length - 1].classList.add('onLeave')
-      this.mainCards = this.mainCards.unshift(card)
-      this.moveElement().then(() => {
-        elements.forEach(el => {
-          el.classList.remove('beforeEnter')
-          el.classList.remove('onEnter')
-          el.classList.remove('onLeave')
-        })
+    swipeCard (card) {
+      const cloneCard = cloneDeep(card)
+      this.mainCards.unshift(cloneCard)
+      this.mainCards[this.mainCards.length - 3].class = 'beforeEnter'
+      this.mainCards[this.mainCards.length - 2].class = 'onEnter'
+      this.mainCards[this.mainCards.length - 1].class = 'onLeave'
+      this.removeElement().then(() => {
       })
     },
-    moveElement () {
-      return new Promise(resolve => setTimeout(() => resolve(this.test()), 500))
+    removeElement () {
+      return new Promise(resolve => setTimeout(() => resolve(this.popCard()), 500))
     },
-    test () {
-      this.mainCards = this.mainCards.pop()
+    popCard () {
+      this.mainCards.pop()
+      this.mainCards.forEach(el => {
+        el.class = null
+      })
+    },
+    classModifier (card) {
+      return card.class && `${card.class}`
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-$default-diff:  50px;
+$default-diff:  70px;
 $default-width: 100%;
 $default-min: 10%;
 
@@ -166,8 +169,8 @@ $default-min: 10%;
 
     @for $i from 1 through 3 {
       &:not(:last-child):nth-child(#{$i}) {
-        top: ($default-diff - (($i * 20) - 10));
-        transform: scale(0.9 + (0.01 * $i) + (0.02 * $i));
+        top: ($default-diff - (($i * 30) - 20));
+        transform: scale(0.85 + (0.05 * $i));
         opacity: (0 + 0.25 * $i);
         z-index: $i;
       }
@@ -181,12 +184,12 @@ $default-min: 10%;
 }
 
 @keyframes restore {
-    0% {transform: scale(0.96); opacity: 0.5; top: 20px;}
+    0% {transform: scale(0.95); opacity: 0.5; top: 30px;}
     100% {transform: scale(1); opacity: 1; top: 0;}
 }
 
 @keyframes beforeRestore {
-    0% {transform: scale(0.93); opacity: 0.25; top: 40px;}
-    100% {transform: scale(0.96); opacity: 0.5; top: 20px;}
+    0% {transform: scale(0.9); opacity: 0.25; top: 60px;}
+    100% {transform: scale(0.95); opacity: 0.5; top: 30px;}
 }
 </style>
