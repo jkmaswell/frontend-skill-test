@@ -6,7 +6,6 @@
       :data-card="index"
       class="card"
     >
-      {{ card.buyerName }}
       <div class="card__logo-container">
         <img
           src="../../assets/logo-510.png"
@@ -15,9 +14,13 @@
         <span class="card__status" @click="swipeCard()">{{ card.status }}</span>
       </div>
       <div class="card__invoice-info">
-        <div class="card__invoice">
-          <span>{{ language.invoice }}</span>
-          <span>{{ card.code }}</span>
+        <div class="card__cell">
+          <span class="card__label">{{ language.invoice }}</span>
+          <span class="card__highlight">{{ card.code }}</span>
+        </div>
+        <div class="card__cell card__right">
+          <span class="card__label">{{ language.totalAmount }}</span>
+          <span class="card__highlight">€{{ card.totalAmount }}</span>
         </div>
       </div>
     </div>
@@ -116,6 +119,33 @@ $default-min: 10%;
       font-size: 1.2rem;
       line-height: 2rem;
       color: $card-status-color;
+    }
+
+    &__invoice-info {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5rem;
+    }
+
+    &__cell {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__right {
+      text-align: right;
+    }
+
+    &__label {
+      font-size: 1.3rem;
+      color: $card-label-color;
+      margin-bottom: 0.7rem;
+    }
+
+    &__highlight {
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: $card-highlight-color;
     }
 
     &:last-child {
