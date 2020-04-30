@@ -1,5 +1,5 @@
 
-export default function loaderRoute () {
+export default function invoiceRoute ({ store }) {
   return {
     path: '/invoice',
     name: 'invoice',

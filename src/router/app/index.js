@@ -5,7 +5,7 @@ export default function appRoute ({ store }) {
     path: '/',
     component: () => import(/* webpackChunkName: "loader-page" */ '@/layouts/StandardLayout/StandardLayout.vue'),
     children: [
-      invoiceRoute(),
+      invoiceRoute({ store }),
     ],
   }
 }

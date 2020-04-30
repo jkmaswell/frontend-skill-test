@@ -41,23 +41,37 @@
           />
         </transition>
       </div>
+      <div class="invoice__content">
+        <transition
+          @enter="fadeInUp"
+        >
+          <main-card
+            v-if="!showLoader"
+            :cards="invoices"
+            :language="viewLanguage.card"
+          />
+        </transition>
+      </div>
     </template>
   </div>
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+import velocity from 'velocity-animate'
 import languageMixin from '@/mixins/languageMixin'
 import animationsMixin from '@/mixins/animationsMixin'
 import TypeHeader from '@/components/TypeHeader/TypeHeader'
 import LoaderSpinner from '@/components/LoaderSpinner/LoaderSpinner'
-import velocity from 'velocity-animate'
+import MainCard from '@/components/Cards/MainCard'
 
 export default {
   components: {
     TypeHeader,
     LoaderSpinner,
+    MainCard,
   },
-  mixins: [languageMixin('loader'), animationsMixin],
+  mixins: [languageMixin('invoice'), animationsMixin],
   data () {
     return {
       showLoader: true,
@@ -69,6 +83,9 @@ export default {
     }
   },
   computed: {
+    ...mapState({
+      invoices: state => state.invoices.invoices,
+    }),
     headerSettings () {
       return {
         language: this.viewLanguage,
@@ -81,11 +98,17 @@ export default {
     },
   },
   mounted () {
-    setTimeout(() => {
-      this.showLoader = false
-    }, 5000)
+    this.dispatchAction('invoices/getInvoices').then(() => {
+      // Simulate Long BE calling
+      setTimeout(() => {
+        this.showLoader = false
+      }, 3000)
+    })
   },
   methods: {
+    ...mapActions({
+      dispatchAction: 'dispatchAction',
+    }),
     ballFade (el, done) {
       velocity(el, { opacity: 1, translateX: '-100px', translateY: '-100px' }, { duration: 600 })
       velocity(el, { opacity: 0 }, { delay: 50, complete: done })
@@ -130,6 +153,13 @@ export default {
     &__info {
       opacity: 0;
     }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
   }
 }
 </style>
