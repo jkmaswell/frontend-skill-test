@@ -17,7 +17,7 @@
         >
         <span class="card__status">{{ card.status }}</span>
       </div>
-      <div class="card__invoice-info">
+      <div class="card__row card__invoice-info">
         <div class="card__cell">
           <span class="card__label">{{ language.invoice }}</span>
           <span class="card__highlight">{{ card.code }}</span>
@@ -25,6 +25,26 @@
         <div class="card__cell card__right">
           <span class="card__label">{{ language.totalAmount }}</span>
           <span class="card__highlight">€{{ card.totalAmount }}</span>
+        </div>
+      </div>
+      <div class="card__row">
+        <div class="card__cell">
+          <span class="card__label">{{ language.buyerName }}</span>
+          <span class="card__data">{{ card.buyerName }}</span>
+        </div>
+        <div class="card__cell">
+          <span class="card__label">{{ language.sellerName }}</span>
+          <span class="card__data">{{ card.sellerName }}</span>
+        </div>
+      </div>
+      <div class="card__row">
+        <div class="card__cell">
+          <span class="card__label">{{ language.started }}</span>
+          <span class="card__data">{{ card.started }}</span>
+        </div>
+        <div class="card__cell">
+          <span class="card__label">{{ language.blockchainAddress }}</span>
+          <span class="card__data">{{ card.blockchainAddress }}</span>
         </div>
       </div>
     </div>
@@ -140,14 +160,18 @@ $default-min: 10%;
     }
 
     &__invoice-info {
+      margin-top: 5rem;
+    }
+
+    &__row {
       display: flex;
-      justify-content: space-between;
       margin-top: 5rem;
     }
 
     &__cell {
       display: flex;
       flex-direction: column;
+      flex: 1;
     }
 
     &__right {
@@ -158,6 +182,12 @@ $default-min: 10%;
       font-size: 1.3rem;
       color: $card-label-color;
       margin-bottom: 0.7rem;
+    }
+
+    &__data {
+      font-size: 1.8rem;
+      font-weight: 300;
+      color: $card-data-color;
     }
 
     &__highlight {
@@ -172,14 +202,17 @@ $default-min: 10%;
 
     &.beforeEnter {
       animation: beforeRestore 500ms;
+      will-change: transform;
     }
 
     &.onEnter {
       animation: restore 500ms;
+      will-change: transform;
     }
 
     &.onLeave {
       animation: scaleUp 500ms;
+      will-change: transform;
     }
 
     @for $i from 1 through 3 {
@@ -195,16 +228,28 @@ $default-min: 10%;
 
 @keyframes scaleUp {
     0% {transform: scale(1) translateY(0); opacity: 1;}
-    100% {transform: scale(1.05) translateY(-40px); opacity: 0;}
+    20% {transform: scale(1.01) translateY(-10px); opacity: 0.8;}
+    40% {transform: scale(1.02) translateY(-20px); opacity: 0.6;}
+    60% {transform: scale(1.03) translateY(-30px); opacity: 0.4;}
+    80% {transform: scale(1.04) translateY(-40px); opacity: 0.2;}
+    100% {transform: scale(1.05) translateY(-50px); opacity: 0;}
 }
 
 @keyframes restore {
     0% {transform: scale(0.95); opacity: 0.5; top: 30px;}
+    20% {transform: scale(0.96); opacity: 0.6; top: 24px;}
+    40% {transform: scale(0.97); opacity: 0.7; top: 18px;}
+    60% {transform: scale(0.98); opacity: 0.8; top: 12px;}
+    80% {transform: scale(0.99); opacity: 0.9; top: 6px;}
     100% {transform: scale(1); opacity: 1; top: 0;}
 }
 
 @keyframes beforeRestore {
     0% {transform: scale(0.9); opacity: 0.25; top: 60px;}
+    20% {transform: scale(0.91); opacity: 0.3; top: 54px;}
+    40% {transform: scale(0.92); opacity: 0.35; top: 48px;}
+    60% {transform: scale(0.93); opacity: 0.4; top: 42px;}
+    80% {transform: scale(0.94); opacity: 0.45; top: 36px;}
     100% {transform: scale(0.95); opacity: 0.5; top: 30px;}
 }
 </style>
