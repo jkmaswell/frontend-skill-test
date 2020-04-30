@@ -1,5 +1,8 @@
 <template>
-  <div class="card-container">
+  <div
+    id="card-container"
+    class="card-container"
+  >
     <div
       v-for="(card, index) in mainCards"
       :key="index"
@@ -12,7 +15,7 @@
           src="../../assets/logo-510.png"
           class="card__logo"
         >
-        <span class="card__status" @click="swipeCard(card)">{{ card.status }}</span>
+        <span class="card__status">{{ card.status }}</span>
       </div>
       <div class="card__invoice-info">
         <div class="card__cell">
@@ -30,6 +33,7 @@
 
 <script>
 import { cloneDeep } from 'lodash'
+import Hammer from 'hammerjs'
 
 export default {
   props: {
@@ -58,9 +62,20 @@ export default {
       },
     },
   },
+  mounted () {
+    this.createSwipe()
+  },
   methods: {
-    swipeCard (card) {
-      const cloneCard = cloneDeep(card)
+    createSwipe () {
+      const container = document.getElementById('card-container')
+      const mc = new Hammer(container)
+      mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
+      mc.on('swipeup', (ev) => {
+        this.swipeCard()
+      })
+    },
+    swipeCard () {
+      const cloneCard = cloneDeep(this.mainCards[this.mainCards.length - 1])
       this.mainCards.unshift(cloneCard)
       this.mainCards[this.mainCards.length - 3].class = 'beforeEnter'
       this.mainCards[this.mainCards.length - 2].class = 'onEnter'
