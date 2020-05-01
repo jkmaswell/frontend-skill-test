@@ -29,5 +29,8 @@ html {
   background: linear-gradient(135deg, $background-color-start 0%, $background-color-end 100%);
   min-height: 100vh;
   padding: 5rem;
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
 }
 </style>

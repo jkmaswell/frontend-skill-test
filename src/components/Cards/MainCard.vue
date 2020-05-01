@@ -83,28 +83,34 @@ export default {
     },
   },
   mounted () {
-    this.createSwipe()
+    this.createSwipeUp()
   },
   methods: {
-    createSwipe () {
-      const container = document.getElementById('card-container')
-      const mc = new Hammer(container)
+    createSwipeUp () {
+      const container = document.querySelector('.card-container')
+      const options = {
+        preventDefault: true,
+      }
+      const mc = new Hammer(container, options)
       mc.get('swipe').set({ direction: Hammer.DIRECTION_ALL })
-      mc.on('swipeup', (ev) => {
+      mc.on('swipeup', () => {
         this.swipeCard()
+      })
+      mc.on('tap', () => {
+        this.selectCard()
       })
     },
     swipeCard () {
       const cloneCard = cloneDeep(this.mainCards[this.mainCards.length - 1])
       this.mainCards.unshift(cloneCard)
-      this.mainCards[this.mainCards.length - 3].class = 'beforeEnter'
-      this.mainCards[this.mainCards.length - 2].class = 'onEnter'
-      this.mainCards[this.mainCards.length - 1].class = 'onLeave'
+      this.mainCards[this.mainCards.length - 3].class = 'before-enter'
+      this.mainCards[this.mainCards.length - 2].class = 'on-enter'
+      this.mainCards[this.mainCards.length - 1].class = 'on-leave'
       this.removeElement().then(() => {
       })
     },
     removeElement () {
-      return new Promise(resolve => setTimeout(() => resolve(this.popCard()), 500))
+      return new Promise(resolve => setTimeout(() => resolve(this.popCard()), 400))
     },
     popCard () {
       this.mainCards.pop()
@@ -113,22 +119,31 @@ export default {
       })
     },
     classModifier (card) {
+      return [
+        this._animationClssModifier(card),
+      ]
+    },
+    _animationClssModifier (card) {
       return card.class && `${card.class}`
+    },
+    selectCard () {
+      const card = this.mainCards[this.mainCards.length - 1]
+      this.$emit('selected', card)
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-$default-diff:  70px;
-$default-width: 100%;
-$default-min: 10%;
-
 .card-container {
   position: relative;
   width: 100%;
   max-width: 80rem;
-  height: 40rem;
+  height: 50rem;
+  flex: 0 0 100%;
+  margin-right: 1rem;
+  opacity: 0;
+  z-index: 2;
 
   .card {
     background-color: $card-background-color;
@@ -139,6 +154,7 @@ $default-min: 10%;
     flex-direction: column;
     position: absolute;
     width: 100%;
+    max-height: 49rem;
 
     &__logo-container {
       display: flex;
@@ -200,28 +216,37 @@ $default-min: 10%;
       z-index: 3;
     }
 
-    &.beforeEnter {
-      animation: beforeRestore 500ms;
+    &.before-enter {
+      animation: beforeRestore 400ms;
       will-change: transform;
     }
 
-    &.onEnter {
-      animation: restore 500ms;
+    &.on-enter {
+      animation: restore 400ms;
       will-change: transform;
     }
 
-    &.onLeave {
-      animation: scaleUp 500ms;
+    &.on-leave {
+      animation: scaleUp 400ms;
       will-change: transform;
     }
 
     @for $i from 1 through 3 {
       &:not(:last-child):nth-child(#{$i}) {
-        top: ($default-diff - (($i * 30) - 20));
+        top: (70px - (($i * 30) - 20));
         transform: scale(0.85 + (0.05 * $i));
         opacity: (0 + 0.25 * $i);
         z-index: $i;
       }
+    }
+  }
+}
+
+.selected .card-container .card {
+  @for $i from 1 through 3 {
+    &:not(:last-child):nth-child(#{$i}) {
+      top: auto;
+      left: -(100px - (($i * 40) - 20));
     }
   }
 }
