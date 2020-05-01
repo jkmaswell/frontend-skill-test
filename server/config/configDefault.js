@@ -85,7 +85,7 @@ const defaultConfig = {
       totalAmount: 204,
       buyerName: 'STF Germany',
       sellerName: 'STF Belgium',
-      started: '25 Jun 2018',
+      started: '25 Apr 2018',
       blockchainAddress: '0x4E5748...c81868F6',
       info: [
         {

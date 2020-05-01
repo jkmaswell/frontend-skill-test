@@ -48,11 +48,11 @@ export default {
       velocity(el, { opacity: 0, translateX: '20px' }, { complete: done })
     },
     scaleUp (el, done) {
-      velocity(el, { opacity: 0, scale: 0 }, { delay: 50 })
+      velocity(el, { opacity: 0, scale: 0 }, { duration: 70 })
       velocity(el, { opacity: 1, scale: 1 }, { complete: done })
     },
     scaleDown (el, done) {
-      velocity(el, { opacity: 1, scale: 1 }, { delay: 50 })
+      velocity(el, { opacity: 1, scale: 1 }, { duration: 70 })
       velocity(el, { opacity: 0, scale: 0 }, { complete: done })
     },
   },

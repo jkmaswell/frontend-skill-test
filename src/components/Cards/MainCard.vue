@@ -19,32 +19,56 @@
       </div>
       <div class="card__row card__invoice-info">
         <div class="card__cell">
-          <span class="card__label">{{ language.invoice }}</span>
-          <span class="card__highlight">{{ card.code }}</span>
+          <span class="card__label">
+            {{ language.invoice }}
+          </span>
+          <span class="card__highlight">
+            {{ card.code }}
+          </span>
         </div>
         <div class="card__cell card__right">
-          <span class="card__label">{{ language.totalAmount }}</span>
-          <span class="card__highlight">€{{ card.totalAmount }}</span>
+          <span class="card__label">
+            {{ language.totalAmount }}
+          </span>
+          <span class="card__highlight">
+            €{{ card.totalAmount }}
+          </span>
         </div>
       </div>
       <div class="card__row">
         <div class="card__cell">
-          <span class="card__label">{{ language.buyerName }}</span>
-          <span class="card__data">{{ card.buyerName }}</span>
+          <span class="card__label">
+            {{ language.buyerName }}
+          </span>
+          <span class="card__data">
+            {{ card.buyerName }}
+          </span>
         </div>
         <div class="card__cell">
-          <span class="card__label">{{ language.sellerName }}</span>
-          <span class="card__data">{{ card.sellerName }}</span>
+          <span class="card__label">
+            {{ language.sellerName }}
+          </span>
+          <span class="card__data">
+            {{ card.sellerName }}
+          </span>
         </div>
       </div>
       <div class="card__row">
         <div class="card__cell">
-          <span class="card__label">{{ language.started }}</span>
-          <span class="card__data">{{ card.started }}</span>
+          <span class="card__label">
+            {{ language.started }}
+          </span>
+          <span class="card__data">
+            {{ card.started }}
+          </span>
         </div>
         <div class="card__cell">
-          <span class="card__label">{{ language.blockchainAddress }}</span>
-          <span class="card__data">{{ card.blockchainAddress }}</span>
+          <span class="card__label">
+            {{ language.blockchainAddress }}
+          </span>
+          <span class="card__data">
+            {{ card.blockchainAddress }}
+          </span>
         </div>
       </div>
     </div>
@@ -143,7 +167,7 @@ export default {
   flex: 0 0 100%;
   margin-right: 1rem;
   opacity: 0;
-  z-index: 2;
+  z-index: 3;
 
   .card {
     background-color: $card-background-color;

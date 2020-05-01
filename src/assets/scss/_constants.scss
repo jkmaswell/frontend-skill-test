@@ -1,18 +1,31 @@
+$white: #ffffff;
+$midGray: #6c6d71;
+$blueRibbon: #0068ff;
+$mishka: #cfd3da;
+$santasGray: #9Fa0aa;
+$sahara: #bcb01a;
+$bombay: #b7b9c0;
+$gallery: #f0f0f0;
+
 $background-color-start: rgba(247,250,255,1);
 $background-color-end: rgba(226,231,239,1);
 
-$shadow-ball-color-start: #cfd3da;
-$shadow-ball-color-end: #ffffff;
+$shadow-ball-color-start: $mishka;
+$shadow-ball-color-end: $white;
 
-$header-primary-color: #9Fa0aa;
-$header-secondary-color: #6c6d71;
+$header-primary-color: $santasGray;
+$header-secondary-color: $midGray;
 
-$loader-color: #6c6d71;
+$loader-color: $midGray;
 
-$card-background-color: #ffffff;
-$card-status-color: #e2d325;
-$card-label-color: #b7b9c0;
-$card-highlight-color: #0068ff;
-$card-data-color: #6c6d71;
+$card-background-color: $white;
+$card-status-color: $sahara;
+$card-label-color: $bombay;
+$card-highlight-color: $blueRibbon;
+$card-data-color: $midGray;
 
 $transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0s;
+
+$separator-color: $gallery;
+
+$wallet-color: $blueRibbon;

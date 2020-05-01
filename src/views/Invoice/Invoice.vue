@@ -67,23 +67,43 @@
             @selected="showCardInfo"
           />
         </transition>
-        <info-card
-          v-for="(info, index) in selectCard.info"
-          :key="index"
-          :card="info"
-        />
         <transition
-          @enter="scaleUp"
-          @leave="scaleDown"
+          @enter="fadeInRight"
+          @leave="fadeOutLeftDelay"
         >
-          <button
+          <info-card
             v-if="selectCard"
-            class="invoice__button invoice__wallet"
-          >
-            <img src="../../assets/icon-wallet.png">
-          </button>
+            :card="selectCard.info[0]"
+            :language="viewLanguage.info"
+            class="info-card__first"
+          />
+        </transition>
+        <transition
+          @enter="fadeInRightDelay"
+          @leave="fadeOutLeft"
+        >
+          <info-card
+            v-if="selectCard"
+            :card="selectCard.info[1]"
+            :language="viewLanguage.info"
+            class="info-card__last"
+          />
         </transition>
       </div>
+      <transition
+        @enter="scaleUp"
+        @leave="scaleDown"
+      >
+        <button
+          v-if="selectCard"
+          class="invoice__button invoice__wallet"
+        >
+          <img
+            src="../../assets/icon-wallet.png"
+            class="invoice__wallet__icon"
+          >
+        </button>
+      </transition>
     </template>
   </div>
 </template>
@@ -273,6 +293,21 @@ export default {
 
   &__wallet {
     position: fixed;
+    bottom: 5rem;
+    right: 5rem;
+    background-color: $wallet-color;
+    border-radius: 50%;
+    width: 6rem;
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0.8rem 2.5rem -0.5rem $wallet-color;
+
+    &__icon {
+      filter: contrast(100);
+      width: 3rem;
+    }
   }
 }
 </style>
