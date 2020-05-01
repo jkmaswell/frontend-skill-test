@@ -2,6 +2,10 @@ import velocity from 'velocity-animate'
 
 export default {
   methods: {
+    ballFade (el, done) {
+      velocity(el, { opacity: 1, translateX: '-100px', translateY: '-100px' }, { duration: 600 })
+      velocity(el, { opacity: 0 }, { delay: 50, complete: done })
+    },
     fade (el, done) {
       velocity(el, { opacity: 0 }, { complete: done })
     },

@@ -1,3 +1,4 @@
+import { cloneDeep } from 'lodash'
 import { shallowMount } from '@vue/test-utils'
 import MainCard from './MainCard'
 
@@ -60,7 +61,7 @@ describe.only('MainCard Component', () => {
   })
 
   describe('Rendering', () => {
-    it('renders InfoCard correctly', () => {
+    it('renders MainCard correctly', () => {
       expect(wrapper.exists()).toBeTruthy()
     })
   })
@@ -70,6 +71,19 @@ describe.only('MainCard Component', () => {
       const removeSpy = jest.spyOn(wrapper.vm, 'removeElement').mockResolvedValue()
       wrapper.vm.swipeCard()
       expect(removeSpy).toHaveBeenCalled()
+    })
+
+    it('popCard', () => {
+      const INITIAL_CARDS = cloneDeep(wrapper.vm.mainCards)
+      wrapper.vm.popCard()
+      wrapper.vm.$nextTick()
+      expect(wrapper.vm.mainCards.length).toEqual(INITIAL_CARDS.length - 1)
+    })
+
+    it('selectCard', () => {
+      wrapper.vm.selectCard()
+      wrapper.vm.$nextTick()
+      expect(wrapper.emitted().selected).toBeTruthy()
     })
   })
 })

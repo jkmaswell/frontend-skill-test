@@ -42,7 +42,7 @@
         </transition>
       </div>
       <div
-        :class="selectCard && 'selected'"
+        :class="selectedCard && 'selected'"
         class="invoice__content"
       >
         <transition
@@ -50,7 +50,7 @@
           @leave="fadeOut"
         >
           <button
-            v-if="selectCard"
+            v-if="selectedCard"
             class="invoice__button invoice__back-button"
             @click="goBack()"
           >
@@ -72,8 +72,8 @@
           @leave="fadeOutLeftDelay"
         >
           <info-card
-            v-if="selectCard"
-            :card="selectCard.info[0]"
+            v-if="selectedCard"
+            :card="selectedCard.info[0]"
             :language="viewLanguage.info"
             class="info-card__first"
           />
@@ -83,8 +83,8 @@
           @leave="fadeOutLeft"
         >
           <info-card
-            v-if="selectCard"
-            :card="selectCard.info[1]"
+            v-if="selectedCard"
+            :card="selectedCard.info[1]"
             :language="viewLanguage.info"
             class="info-card__last"
           />
@@ -95,7 +95,7 @@
         @leave="scaleDown"
       >
         <button
-          v-if="selectCard"
+          v-if="selectedCard"
           class="invoice__button invoice__wallet"
         >
           <img
@@ -111,7 +111,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import Hammer from 'hammerjs'
-import velocity from 'velocity-animate'
 import languageMixin from '@/mixins/languageMixin'
 import animationsMixin from '@/mixins/animationsMixin'
 import TypeHeader from '@/components/TypeHeader/TypeHeader'
@@ -135,7 +134,7 @@ export default {
       startDate: 'January',
       endDate: 'April',
       year: '2018',
-      selectCard: null,
+      selectedCard: null,
     }
   },
   computed: {
@@ -181,18 +180,15 @@ export default {
         this.scrollRight()
       })
     },
-    ballFade (el, done) {
-      velocity(el, { opacity: 1, translateX: '-100px', translateY: '-100px' }, { duration: 600 })
-      velocity(el, { opacity: 0 }, { delay: 50, complete: done })
-    },
     showCardInfo (card) {
-      this.selectCard = card
+      this.selectedCard = card
     },
     goBack () {
-      this.selectCard = null
+      this.selectedCard = null
     },
     scrollLeft () {
       const containerSelected = document.querySelector('.invoice__content.selected')
+      console.log(containerSelected)
       if (containerSelected) {
         containerSelected.style.transform = 'translateX(0)'
       }

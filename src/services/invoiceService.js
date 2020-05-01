@@ -6,7 +6,7 @@ class InvoiceService {
   }
 
   getInvoices () {
-    return this.request.get('api/invoices/')
+    return this.request.get('api/invoices')
       .then(response => response.data)
       .catch((err) => console.error('Ups.. there was an error:', err))
   }

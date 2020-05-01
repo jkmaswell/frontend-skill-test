@@ -4,6 +4,10 @@ const uiConfig = {
     '**/src/**/*.spec.(js|jsx|ts|tsx)|**/__tests__/*.(js|jsx|ts|tsx)',
     '**/shared/**/*.spec.(js|jsx|ts|tsx)',
   ],
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '^@mocks/(.*)$': '<rootDir>/src/mocks/$1',
+  },
   coveragePathIgnorePatterns: ['<rootDir>/src/router/'],
   coverageDirectory: '<rootDir>/coverage/ui/coverage',
   collectCoverage: true,
