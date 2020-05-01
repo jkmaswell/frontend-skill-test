@@ -130,8 +130,7 @@ export default {
       this.mainCards[this.mainCards.length - 3].class = 'before-enter'
       this.mainCards[this.mainCards.length - 2].class = 'on-enter'
       this.mainCards[this.mainCards.length - 1].class = 'on-leave'
-      this.removeElement().then(() => {
-      })
+      this.removeElement()
     },
     removeElement () {
       return new Promise(resolve => setTimeout(() => resolve(this.popCard()), 400))
