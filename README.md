@@ -1,6 +1,6 @@
 # Frontend skill test Solution
 
-You can find the published solution [here](jkmaswell.github.io/frontend-skill-test/).
+You can find the published solution [here](https://jkmaswell.github.io/frontend-skill-test/).
 
 ## Repo
 ### To run locally:
