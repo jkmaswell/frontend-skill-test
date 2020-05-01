@@ -6,7 +6,7 @@ const uiConfig = {
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
-    '^@mocks/(.*)$': '<rootDir>/src/mocks/$1',
+    '^@mocks/(.*)$': '<rootDir>/mocks/$1',
   },
   coveragePathIgnorePatterns: ['<rootDir>/src/router/'],
   coverageDirectory: '<rootDir>/coverage/ui/coverage',
@@ -15,6 +15,9 @@ const uiConfig = {
 
 const serverConfig = {
   testMatch: ['<rootDir>/server/**/*.spec.(js|jsx|ts|tsx)'],
+  moduleNameMapper: {
+    '^@mocks/(.*)$': '<rootDir>/mocks/$1',
+  },
   collectCoverage: true,
   coverageDirectory: '<rootDir>/coverage/server/coverage',
   coveragePathIgnorePatterns: ['<rootDir>/server/config'],
